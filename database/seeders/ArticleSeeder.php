@@ -25,12 +25,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Create 30 articles
-        for ($a = 0; $a < 30; $a++) {
+        for ($a = 0; $a < 32; $a++) {
             $article = Article::create([
                 'user_id' => $user->id,
                 'title' => Str::random(10),
                 'body' => Str::random(100),
             ]);
+
+            $numberOfImages = rand(1, 3);
+            for ($j = 0; $j < $numberOfImages; $j++) {
+                $article->images()->create([
+                    'url' => 'https://via.placeholder.com/150'
+                ]);
+            }
 
             // Attach random number of comments to each article
             for ($j = 0; $j < rand(1, 5); $j++) {
