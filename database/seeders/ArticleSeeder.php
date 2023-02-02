@@ -5,52 +5,59 @@ use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
+        $faker = Faker::create();
+
         // Create the user with avatar
         $user = User::create([
-            'name' => 'Blog User',
-            'email' => 'bloguser@example.com',
+            'name' => $faker->name,
+            'email' => $faker->email,
             'password' => Hash::make('password'),
-            'avatar' => 'https://via.placeholder.com/150'
+            'avatar' => 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
         ]);
 
         // Create 30 articles
         for ($a = 0; $a < 32; $a++) {
             $article = Article::create([
-                'user_id' => $user->id,
-                'title' => Str::random(10),
-                'body' => Str::random(100),
+                'author_id' => $user->id,
+                'title' => $faker->realText(50),
+                'content' => $faker->realText(600),
             ]);
 
-            $numberOfImages = rand(1, 3);
+            $numberOfImages = rand(2, 4);
             for ($j = 0; $j < $numberOfImages; $j++) {
+                $image = $this->UnsplashImage();
                 $article->images()->create([
-                    'url' => 'https://via.placeholder.com/150'
+                    'url' => $image->urls->regular
                 ]);
             }
 
             // Attach random number of comments to each article
-            for ($j = 0; $j < rand(1, 5); $j++) {
+            for ($c = 0; $c < rand(1, 5); $c++) {
                 $comment = new Comment([
-                    'commenter_name' => Str::random(10),
-                    'body' => Str::random(100),
+                    'author_name' => $faker->name,
+                    'author_email' => $faker->email,
+                    'text' => $faker->realText(250),
                 ]);
                 $article->comments()->save($comment);
             }
 
             // Increment the upvotes counter for each article
-            $upvotes = rand(1, 10);
+            $upvotes = rand(1, 5000);
             $article->update(['upvotes' => $upvotes]);
         }
+    }
+
+    private function UnsplashImage()
+    {
+        $client = new GuzzleHttp\Client();
+        $response = $client->get('https://api.unsplash.com/photos/random?query=article&client_id=5x9zQmxR4NvkOjxxM3sb5FNDnQaYthxFocyZ5pbrNxY');
+        $image = json_decode($response->getBody());
+        return $image;
     }
 }
