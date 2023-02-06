@@ -10,18 +10,19 @@ class ArticleController extends Controller
   public function index()
   {
       $articles = Article::all();
-      return view('articles.index', compact('articles'));
+      dd($articles);
+      return view('index', compact('articles'));
   }
 
   public function show($id)
   {
       $article = Article::findOrFail($id);
-      return view('articles.show', compact('article'));
+      return view('articles_show', compact('article'));
   }
 
   public function create()
   {
-      return view('articles.create');
+      return view('articles_create');
   }
 
   public function store(Request $request)
@@ -40,7 +41,7 @@ class ArticleController extends Controller
   public function edit($id)
   {
       $article = Article::findOrFail($id);
-      return view('articles.edit', compact('article'));
+      return view('articles_edit', compact('article'));
   }
 
   public function update(Request $request, $id)
