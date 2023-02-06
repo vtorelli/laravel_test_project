@@ -15,7 +15,7 @@
 
       @endforeach
     @else
-      <p>No articles found.</p>
+      <p>Wow, such empty.</p>
     @endif
 
 
