@@ -38,6 +38,11 @@ class DatabaseSeeder extends Seeder
                 'content' => $faker->realText(600),
             ]);
 
+            echo "creating article $article->title, please wait.....";
+            echo "\n";
+            echo "adding images....";
+            echo "\n";
+
             $images = $this->loadImages();
             foreach ($images as $image) {
                 $article->images()->create([
@@ -45,9 +50,8 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
 
-            echo "created article $article->title";
-            echo "\n";
-            echo "adding comments...";
+            echo "images added succesfully";
+            echo "adding comments....";
             echo "\n";
 
             // Attach random number of comments to each article
@@ -60,9 +64,9 @@ class DatabaseSeeder extends Seeder
                 $article->comments()->save($comment);
             }
 
-            echo "added comments to the article";
+            echo "comments added succesfully";
             echo "\n";
-            echo "upvoting article";
+            echo "upvoting article....";
             echo "\n";
 
             // Increment the upvotes counter for each article

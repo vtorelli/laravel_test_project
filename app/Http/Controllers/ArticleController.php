@@ -10,7 +10,8 @@ class ArticleController extends Controller
   public function index()
   {
       $articles = Article::all();
-      dd($articles);
+      // die(var_dump($articles));
+      // \Log::debug(\DB::getQueryLog());
       return view('index', compact('articles'));
   }
 
