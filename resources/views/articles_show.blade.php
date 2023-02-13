@@ -1,12 +1,14 @@
 @extends('layout')
 
 @section('title')
-  <title>Article</title>
-@endsection
 
+  {{ $article->title }}
+
+@endsection
 
 @section('content')
 
-  <h1>Article</h1>
+  <h1>{{ $article->title }}</h1>
+  <p>{{ $article->body }}</p>
 
 @endsection
