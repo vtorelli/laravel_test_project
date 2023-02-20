@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
         $faker = Faker::create();
 
         echo "creating blog owner";
-
         // Create the user with avatar
         $user = User::create([
             'name' => "Marion",
             'email' => "marion@marion.com",
             'password' => "marion",
+            'avatar' => 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
         ]);
 
         echo "\n";
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
             $article = Article::create([
                 'author_id' => $user->id,
                 'title' => $faker->realText(50),
-                'content' => $faker->paragraphs(23, true),
+                'content' => $faker->realText(10000),
             ]);
 
             echo "creating article $article->title, please wait.....";

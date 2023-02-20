@@ -2,21 +2,27 @@
 
 @section('content')
 
-  <h1>My blog</h1>
+<div class="main-header">
+  <h1>MY FIRST LARAVEL BLOG</h1>
+</div>
 
-
+<div class="main-container">
+  <div class="article-cards">
     @if (!empty($articles))
       @foreach ($articles as $article)
 
-      <h2>{{ $article->title }}</h2>
-      <p>{{ $article->content }}</p>
-      <p>Author: {{ $article->author }}</p>
-      <!-- <a href="{{ route('articles_show', $article->id) }}">{{ $article->title }}</a> -->
+      <a href="{{ route('article_show', ['id' => $article->id]) }}">
+        <div class="card">
+          <h2>{{ $article->title }}</h2>
+          <p>{{ Str::limit($article->content, 200) }}</p>
+        </div>
+      </a>
 
       @endforeach
     @else
-      <p>Wow, such empty.</p>
+      <p>No articles found.</p>
     @endif
-
+  </div>
+</div>
 
 @endsection

@@ -19,7 +19,10 @@ class CreateImagesTable extends Migration
             $table->string('path')->default('');
             $table->timestamps();
 
-            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
+            $table->foreign('article_id')
+                  ->references('id')
+                  ->on('articles')
+                  ->onDelete('cascade');
         });
     }
 

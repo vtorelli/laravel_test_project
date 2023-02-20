@@ -8,7 +8,7 @@ proxy:
     - test.local.lndo.site
 services:
   database:
-    portforward: 3330
+    portforward: 3306
   appserver:
     run_as_root:
       - a2enmod headers

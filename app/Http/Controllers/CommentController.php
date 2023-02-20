@@ -11,17 +11,21 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'body' => 'required',
+            'content' => 'required',
+            'author_name' => 'required',
+            'author_email' => 'required|email',
             'article_id' => 'required',
         ]);
 
         $comment = Comment::create([
-            'body' => $validatedData['body'],
-            'article_id' => $validatedData['article_id'],
-            'user_id' => auth()->id(),
-        ]);
+          'content' => $validatedData['content'],
+          'author_name' => $validatedData['author_name'],
+          'author_email' => $validatedData['author_email'],
+          'article_id' => $validatedData['article_id'],
+          'user_id' => auth()->id(),
+      ]);
 
-        return back()->with('success', 'Comment added successfully!');
+        return redirect()->back()->with('success', 'Comment added successfully!');
     }
 
     // delete comment

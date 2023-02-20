@@ -18,7 +18,8 @@ class ArticleController extends Controller
   public function show($id)
   {
       $article = Article::findOrFail($id);
-      return view('articles_show', compact('article'));
+      $comments = $article->comments;
+      return view('articles_show', compact('article', 'comments'));
   }
 
   public function create()
@@ -48,7 +49,7 @@ class ArticleController extends Controller
   public function update(Request $request, $id)
   {
       $validatedData = $request->validate([
-          'title' => 'required|max:255',
+          'title' => 'required',
           'content' => 'required',
           'author' => 'required',
       ]);

@@ -1,0 +1,36 @@
+/* import necessary fonts for app */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&family=Roboto+Slab:wght@300;400;600;800&display=swap');
+
+/* import CSS partials */
+@import url('index.css');
+@import url('navbar.css');
+@import url('articles_show.css');
+
+a {
+  text-decoration: none;
+  color: #FB7B83;
+}
+a:hover {
+  text-decoration: none;
+  color: #FAA7B8;
+}
+
+p {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  font-family: 'Roboto Slab', serif;
+  background-color: #edf2f4;
+  margin: 0;
+  color: #2b2d42;
+}
+
+.main-container {
+  margin: auto;
+  width: 80%;
+}

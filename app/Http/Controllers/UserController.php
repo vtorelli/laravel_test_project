@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function create()
     {
-        return view('users.create');
+        return view('users_create');
     }
 
     // save new user
@@ -34,12 +34,12 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        return view('users_show', compact('user'));
     }
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        return view('users_edit', compact('user'));
     }
 
     public function update(Request $request, User $user)
