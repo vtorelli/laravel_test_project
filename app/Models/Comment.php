@@ -17,4 +17,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Article::class);
     }
+
+    public function emailVerification()
+    {
+        return $this->hasOne(EmailVerification::class);
+    }
 }
