@@ -30,14 +30,21 @@ class ArticleController extends Controller
   public function store(Request $request)
   {
       $validatedData = $request->validate([
-          'title' => 'required|max:255',
+          'title' => 'required',
           'content' => 'required',
           'author' => 'required',
+          'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
       ]);
 
-      $article = Article::create($validatedData);
+      $article = new Article;
+      $article->title = $validatedData['title'];
+      $article->content = $validatedData['content'];
+      $article->author = $validatedData['author'];
+      $article->image = $request->file('image')->store('public/images');
 
-      return redirect('/articles/' . $article->id);
+      $article->save();
+
+      return redirect()->route('articles.show', $article->id);
   }
 
   public function edit($id)

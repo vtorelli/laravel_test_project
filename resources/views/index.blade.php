@@ -22,6 +22,8 @@
     @else
       <p>No articles found.</p>
     @endif
+
+    <a href="{{ route('articles_create') }}" class="btn btn-primary">Create New Article</a>
   </div>
 </div>
 
